@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contracting Day Rate Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            text-align: center;
+            font-size: 1.5em;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contracting Day Rate Calculator</h1>
+        <div class="form-group">
+            <label for="annual-salary">Annual Salary ($AUD):</label>
+            <input type="number" id="annual-salary" placeholder="Enter your annual salary">
+        </div>
+        <div class="form-group">
+            <label for="working-days">Working Days per Year:</label>
+            <input type="number" id="working-days" value="230" placeholder="Enter working days (e.g., 230)">
+        </div>
+        <div class="form-group">
+            <label for="profit-margin">Profit Margin (%):</label>
+            <input type="number" id="profit-margin" value="30" placeholder="Enter your desired profit margin">
+        </div>
+        <button onclick="calculateRate()">Calculate Day Rate</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateRate() {
+            const annualSalary = parseFloat(document.getElementById('annual-salary').value);
+            const workingDays = parseFloat(document.getElementById('working-days').value);
+            const profitMargin = parseFloat(document.getElementById('profit-margin').value);
+
+            if (isNaN(annualSalary) || isNaN(workingDays) || isNaN(profitMargin)) {
+                document.getElementById('result').innerText = "Please fill out all fields.";
+                return;
+            }
+
+            const dayRate = (annualSalary / workingDays) * (1 + profitMargin / 100);
+            document.getElementById('result').innerText = `Your contracting day rate is $${dayRate.toFixed(2)} per day.`;
+        }
+    </script>
+</body>
+</html>
